@@ -78,7 +78,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 75
+			总文章数 76
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -174,6 +174,74 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-volatile关键字总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/19/volatile%E5%85%B3%E9%94%AE%E5%AD%97%E6%80%BB%E7%BB%93/">volatile关键字总结</a>
+    </h1>
+  
+
+		<!--显示阅读次数-->
+		
+		<!--显示阅读次数完毕-->
+        
+        <a href="/2020/12/19/volatile%E5%85%B3%E9%94%AE%E5%AD%97%E6%80%BB%E7%BB%93/" class="archive-article-date">
+  	<time datetime="2020-12-19T03:01:02.180Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h1><p><code>volatile</code>是Java提供的一种轻量级的同步机制。Java 语言包含两种内在的同步机制：同步块（或方法）和 <code>volatile</code> 变量，相比于<code>synchronized</code>（<code>synchronized</code>通常称为重量级锁），<code>volatile</code>更轻量级，因为它不会引起线程上下文的切换和调度。但是<code>volatile</code> 变量的同步性较差（有时它更简单并且开销更低），而且其使用也更容易出错。
+        
+          <a class="article-more-a" href="/2020/12/19/volatile%E5%85%B3%E9%94%AE%E5%AD%97%E6%80%BB%E7%BB%93/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/19/volatile%E5%85%B3%E9%94%AE%E5%AD%97%E6%80%BB%E7%BB%93/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-类加载器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -773,74 +841,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/12/08/StringTable/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Java中的逃逸分析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/08/Java%E4%B8%AD%E7%9A%84%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/">Java中的逃逸分析</a>
-    </h1>
-  
-
-		<!--显示阅读次数-->
-		
-		<!--显示阅读次数完毕-->
-        
-        <a href="/2020/12/08/Java%E4%B8%AD%E7%9A%84%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/" class="archive-article-date">
-  	<time datetime="2020-12-08T11:27:58.362Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="逃逸分析"><a href="#逃逸分析" class="headerlink" title="逃逸分析"></a>逃逸分析</h3><p>逃逸分析的基本行为就是分析对象动态作用域：当一个对象在方法中被定义后，它可能被外部方法所引用，例如作为调用参数传递到其他地方中，称为方法逃逸；甚至还有可能被外部线程访问到吗，譬如赋值给可以在其他线程中访问的实例变量，这种称为线程逃逸；从 不逃逸、方法逃逸到线程逃逸，称为对象由低到高不同程度的逃逸。</p>
-        
-          <a class="article-more-a" href="/2020/12/08/Java%E4%B8%AD%E7%9A%84%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/08/Java%E4%B8%AD%E7%9A%84%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/">展开全文 >></a>
         </p>
       
 
