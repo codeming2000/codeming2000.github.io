@@ -78,7 +78,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 77
+			总文章数 78
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -178,6 +178,74 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-JVM指令手册" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/14/JVM%E6%8C%87%E4%BB%A4%E6%89%8B%E5%86%8C/">JVM指令手册</a>
+    </h1>
+  
+
+		<!--显示阅读次数-->
+		
+		<!--显示阅读次数完毕-->
+        
+        <a href="/2020/12/14/JVM%E6%8C%87%E4%BB%A4%E6%89%8B%E5%86%8C/" class="archive-article-date">
+  	<time datetime="2020-12-14T10:17:35.016Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JVM指令手册"><a href="#JVM指令手册" class="headerlink" title="JVM指令手册"></a>JVM指令手册</h1>
+        
+          <a class="article-more-a" href="/2020/12/14/JVM%E6%8C%87%E4%BB%A4%E6%89%8B%E5%86%8C/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/14/JVM%E6%8C%87%E4%BB%A4%E6%89%8B%E5%86%8C/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-JVM垃圾回收篇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -774,76 +842,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/12/07/JVM%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA%E5%9F%9F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-ajax请求无法下载文件的原因(踩坑)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/10/20/ajax%E8%AF%B7%E6%B1%82%E6%97%A0%E6%B3%95%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E5%8E%9F%E5%9B%A0(%E8%B8%A9%E5%9D%91)/">ajax请求无法下载文件的原因(踩坑)</a>
-    </h1>
-  
-
-		<!--显示阅读次数-->
-		
-		<!--显示阅读次数完毕-->
-        
-        <a href="/2020/10/20/ajax%E8%AF%B7%E6%B1%82%E6%97%A0%E6%B3%95%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E5%8E%9F%E5%9B%A0(%E8%B8%A9%E5%9D%91)/" class="archive-article-date">
-  	<time datetime="2020-10-20T12:03:08.673Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-10-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h2><p>Ajax下载文件的这种方式本来就是禁止的。出于安全因素的考虑，javascript是不能够保存文件到本地的，所以ajax考虑到了这点，只是接受json,text,html,xml格式的返回值，二进制的返回格式就会抛出这个异常。</p>
-<p>因为response原因，一般请求浏览器是会处理服务器输出的response，例如生成png、文件下载等,然而ajax请求只是个“字符型”的请求，即请求的内容是以文本类型存放的。</p>
-<p>文件的下载是以二进制形式进行的，虽然可以读取到返回的response，但只是读取而已，是无法执行的，说白点就是js无法调用到浏览器的下载处理机制和程序。</p>
-        
-          <a class="article-more-a" href="/2020/10/20/ajax%E8%AF%B7%E6%B1%82%E6%97%A0%E6%B3%95%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E5%8E%9F%E5%9B%A0(%E8%B8%A9%E5%9D%91)/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/10/20/ajax%E8%AF%B7%E6%B1%82%E6%97%A0%E6%B3%95%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E5%8E%9F%E5%9B%A0(%E8%B8%A9%E5%9D%91)/">展开全文 >></a>
         </p>
       
 
