@@ -6,20 +6,14 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://codeming2000.github.io/blog">
-  <title>观察者模式 | CodeMing的博客</title>
+  <title>CodeMing的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 天气预报项目需求 气象站可以将每天测量到的温度，湿度，气压等等以公告的形式发布出去(比如发布到自己的网站或第三方)。 需要设计开放型API，便于其他第三方也能接入气象站获取数据。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="观察者模式">
-<meta property="og:url" content="https:&#x2F;&#x2F;codeming2000.github.io&#x2F;blog&#x2F;2021&#x2F;01&#x2F;21&#x2F;%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F&#x2F;index.html">
+  <meta name="description" content="河南大学软件学院18级本科生">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CodeMing的博客">
+<meta property="og:url" content="https:&#x2F;&#x2F;codeming2000.github.io&#x2F;blog&#x2F;page&#x2F;9&#x2F;index.html">
 <meta property="og:site_name" content="CodeMing的博客">
-<meta property="og:description" content="1 天气预报项目需求 气象站可以将每天测量到的温度，湿度，气压等等以公告的形式发布出去(比如发布到自己的网站或第三方)。 需要设计开放型API，便于其他第三方也能接入气象站获取数据。">
-<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;master&#x2F;%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.assets&#x2F;image-20210121102434102.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;master&#x2F;%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.assets&#x2F;image-20210121102442687.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;master&#x2F;%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.assets&#x2F;image-20210121103438920.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;master&#x2F;%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.assets&#x2F;image-20210121103805670.png">
-<meta property="article:published_time" content="2021-01-21T02:22:10.376Z">
-<meta property="article:modified_time" content="2021-01-21T02:52:28.357Z">
+<meta property="og:description" content="河南大学软件学院18级本科生">
 <meta property="article:author" content="CodeMing">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="后端">
@@ -29,7 +23,6 @@
 <meta property="article:tag" content="代码">
 <meta property="article:tag" content="开源">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;master&#x2F;%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.assets&#x2F;image-20210121102434102.png">
   
     <link rel="alternative" href="/atom.xml" title="CodeMing的博客" type="application/atom+xml">
   
@@ -184,165 +177,37 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-观察者模式" class="article article-type-post " itemscope itemprop="blogPost">
+            
+  
+    <article id="post-23 种设计模式的设计理念" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      观察者模式
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/15/23%20%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5/">23 种设计模式的设计理念</a>
     </h1>
   
 
 		<!--显示阅读次数-->
 		
-		  <br/>
-		  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
-		  <span class="icon-sort"></span>
-		  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
-					阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
-		  </span>
-		  </a>
-		
 		<!--显示阅读次数完毕-->
         
-        <a href="/2021/01/21/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-01-21T02:22:10.376Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-21</time>
+        <a href="/2020/09/15/23%20%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5/" class="archive-article-date">
+  	<time datetime="2020-09-15T11:36:21.107Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-09-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-天气预报项目需求"><a href="#1-天气预报项目需求" class="headerlink" title="1 天气预报项目需求"></a>1 天气预报项目需求</h2><ul>
-<li>气象站可以将每天测量到的温度，湿度，气压等等以公告的形式发布出去(比如发布到自己的网站或第三方)。</li>
-<li>需要设计开放型API，便于其他第三方也能接入气象站获取数据。<a id="more"></a></li>
-<li>提供温度、气压和湿度的接口</li>
-<li>测量数据更新时，要能实时的通知给第三方  </li>
-</ul>
-<h2 id="2-天气预报设计方案1-普通方案"><a href="#2-天气预报设计方案1-普通方案" class="headerlink" title="2 天气预报设计方案1-普通方案"></a>2 天气预报设计方案1-普通方案</h2><p><img src="https://gitee.com/codeming2000/myblog-photos/raw/master/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.assets/image-20210121102434102.png" alt="image-20210121102434102"></p>
-<p><img src="https://gitee.com/codeming2000/myblog-photos/raw/master/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.assets/image-20210121102442687.png" alt="image-20210121102442687"></p>
-<ul>
-<li><p>代码实现</p>
-<ul>
-<li><p>CurrentConditions</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 显示当前天气情况（可以理解成是气象站自己的网站）</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CurrentConditions</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 温度，气压，湿度</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> temperature;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> pressure;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> humidity;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//更新 天气情况，是由 WeatherData 来调用，我使用推送模式</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">float</span> temperature, <span class="keyword">float</span> pressure, <span class="keyword">float</span> humidity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.temperature = temperature;</span><br><span class="line">        <span class="keyword">this</span>.pressure = pressure;</span><br><span class="line">        <span class="keyword">this</span>.humidity = humidity;</span><br><span class="line">        display();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//显示</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"***Today mTemperature: "</span> + temperature + <span class="string">"***"</span>);</span><br><span class="line">        System.out.println(<span class="string">"***Today mPressure: "</span> + pressure + <span class="string">"***"</span>);</span><br><span class="line">        System.out.println(<span class="string">"***Today mHumidity: "</span> + humidity + <span class="string">"***"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>WeatherData</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 类是核心</span></span><br><span class="line"><span class="comment"> * 1. 包含最新的天气情况信息 </span></span><br><span class="line"><span class="comment"> * 2. 含有 CurrentConditions 对象</span></span><br><span class="line"><span class="comment"> * 3. 当数据有更新时，就主动的调用   CurrentConditions对象update方法(含 display), 这样他们（接入方）就看到最新的信息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeatherData</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> temperatrue;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> pressure;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> humidity;</span><br><span class="line">    <span class="keyword">private</span> CurrentConditions currentConditions;</span><br><span class="line">    <span class="comment">//加入新的第三方</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WeatherData</span><span class="params">(CurrentConditions currentConditions)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.currentConditions = currentConditions;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getTemperature</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> temperatrue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getPressure</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> pressure;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getHumidity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> humidity;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dataChange</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//调用 接入方的 update</span></span><br><span class="line">        currentConditions.update(getTemperature(), getPressure(), getHumidity());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//当数据有更新时，就调用 setData</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(<span class="keyword">float</span> temperature, <span class="keyword">float</span> pressure, <span class="keyword">float</span> humidity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.temperatrue = temperature;</span><br><span class="line">        <span class="keyword">this</span>.pressure = pressure;</span><br><span class="line">        <span class="keyword">this</span>.humidity = humidity;</span><br><span class="line">        <span class="comment">//调用dataChange， 将最新的信息 推送给 接入方 currentConditions</span></span><br><span class="line">        dataChange();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Client</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//创建接入方 currentConditions</span></span><br><span class="line">    CurrentConditions currentConditions = <span class="keyword">new</span> CurrentConditions();</span><br><span class="line">    <span class="comment">//创建 WeatherData 并将 接入方 currentConditions 传递到 WeatherData中</span></span><br><span class="line">    WeatherData weatherData = <span class="keyword">new</span> WeatherData(currentConditions);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//更新天气情况</span></span><br><span class="line">    weatherData.setData(<span class="number">30</span>, <span class="number">150</span>, <span class="number">40</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//天气情况变化</span></span><br><span class="line">    System.out.println(<span class="string">"============天气情况变化============="</span>);</span><br><span class="line">    weatherData.setData(<span class="number">40</span>, <span class="number">160</span>, <span class="number">20</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>问题分析</p>
-<ul>
-<li>其他第三方接入气象站获取数据的问题</li>
-<li>无法在运行时动态的添加第三方 (新浪网站)</li>
-<li>违反ocp原则=&gt;观察者模式</li>
-<li>在WeatherData中， 当增加一个第三方，都需要创建一个对应的第三方的公告板<br>对象，并加入到dataChange, 不利于维护，也不是动态加入</li>
-</ul>
-</li>
-</ul>
-<h2 id="3-观察者模式原理"><a href="#3-观察者模式原理" class="headerlink" title="3 观察者模式原理"></a>3 观察者模式原理</h2><ul>
-<li>观察者模式类似订牛奶业务<ol>
-<li>奶站/气象局： Subject</li>
-<li>用户/第三方网站： Observer  </li>
-</ol>
-</li>
-<li>Subject：登记注册、移除和通知  <ol>
-<li>registerObserver 注册</li>
-<li>removeObserver 移除</li>
-<li>notifyObservers() 通知所有的注册的用户，根据不同需求，可以是更新数据，让用户来取，也可能是实施推送，看具体需求定  </li>
-</ol>
-</li>
-<li>Observer：接收输入</li>
-<li>观察者模式：对象之间多对一依赖的一种设计方案，被依赖的对象为Subject，依赖的对象为Observer， Subject通知Observer变化,比如这里的奶站是Subject，是1的一方。用户时Observer，是多的一方。  </li>
-</ul>
-<h2 id="4-观察者模式解决天气预报需求"><a href="#4-观察者模式解决天气预报需求" class="headerlink" title="4 观察者模式解决天气预报需求"></a>4 观察者模式解决天气预报需求</h2><ul>
-<li><p>类图说明</p>
-<p><img src="https://gitee.com/codeming2000/myblog-photos/raw/master/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.assets/image-20210121103438920.png" alt="image-20210121103438920"></p>
-</li>
-<li><p>代码实现</p>
-<ul>
-<li><p>Subject</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//接口, 让WeatherData 来实现 </span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(Observer o)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer o)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Observer</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//观察者接口，有观察者来实现</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">float</span> temperature, <span class="keyword">float</span> pressure, <span class="keyword">float</span> humidity)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>CurrentConditions</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CurrentConditions</span> <span class="keyword">implements</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 温度，气压，湿度</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> temperature;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> pressure;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> humidity;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新 天气情况，是由 WeatherData 来调用，我使用推送模式</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">float</span> temperature, <span class="keyword">float</span> pressure, <span class="keyword">float</span> humidity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.temperature = temperature;</span><br><span class="line">        <span class="keyword">this</span>.pressure = pressure;</span><br><span class="line">        <span class="keyword">this</span>.humidity = humidity;</span><br><span class="line">        display();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"***Today mTemperature: "</span> + temperature + <span class="string">"***"</span>);</span><br><span class="line">        System.out.println(<span class="string">"***Today mPressure: "</span> + pressure + <span class="string">"***"</span>);</span><br><span class="line">        System.out.println(<span class="string">"***Today mHumidity: "</span> + humidity + <span class="string">"***"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>BaiduSite</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaiduSite</span> <span class="keyword">implements</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 温度，气压，湿度</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> temperature;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> pressure;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">float</span> humidity;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新 天气情况，是由 WeatherData 来调用，我使用推送模式</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">float</span> temperature, <span class="keyword">float</span> pressure, <span class="keyword">float</span> humidity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.temperature = temperature;</span><br><span class="line">        <span class="keyword">this</span>.pressure = pressure;</span><br><span class="line">        <span class="keyword">this</span>.humidity = humidity;</span><br><span class="line">        display();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 显示</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"===百度网站===="</span>);</span><br><span class="line">        System.out.println(<span class="string">"***百度网站 气温 : "</span> + temperature + <span class="string">"***"</span>);</span><br><span class="line">        System.out.println(<span class="string">"***百度网站 气压: "</span> + pressure + <span class="string">"***"</span>);</span><br><span class="line">        System.out.println(<span class="string">"***百度网站 湿度: "</span> + humidity + <span class="string">"***"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>WeatherData</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 类是核心</span></span><br><span class="line"><span class="comment"> * 1. 包含最新的天气情况信息 </span></span><br><span class="line"><span class="comment"> * 2. 含有 观察者集合，使用ArrayList管理</span></span><br><span class="line"><span class="comment"> * 3. 当数据有更新时，就主动的调用   ArrayList, 通知所有的（接入方）就看到最新的信息</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Administrator</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeatherData</span> <span class="keyword">implements</span> <span class="title">Subject</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">float</span> temperatrue;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">float</span> pressure;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">float</span> humidity;</span><br><span class="line">	<span class="comment">//观察者集合</span></span><br><span class="line">	<span class="keyword">private</span> ArrayList&lt;Observer&gt; observers;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//加入新的第三方</span></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">WeatherData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		observers = <span class="keyword">new</span> ArrayList&lt;Observer&gt;();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getTemperature</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> temperatrue;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getPressure</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> pressure;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getHumidity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> humidity;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dataChange</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">//调用 接入方的 update</span></span><br><span class="line">		notifyObservers();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//当数据有更新时，就调用 setData</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(<span class="keyword">float</span> temperature, <span class="keyword">float</span> pressure, <span class="keyword">float</span> humidity)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.temperatrue = temperature;</span><br><span class="line">		<span class="keyword">this</span>.pressure = pressure;</span><br><span class="line">		<span class="keyword">this</span>.humidity = humidity;</span><br><span class="line">		<span class="comment">//调用dataChange， 将最新的信息 推送给 接入方 currentConditions</span></span><br><span class="line">		dataChange();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//注册一个观察者</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerObserver</span><span class="params">(Observer o)</span> </span>&#123;</span><br><span class="line">		observers.add(o);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//移除一个观察者</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeObserver</span><span class="params">(Observer o)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(observers.contains(o)) &#123;</span><br><span class="line">			observers.remove(o);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//遍历所有的观察者，并通知</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyObservers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; observers.size(); i++) &#123;</span><br><span class="line">			observers.get(i).update(<span class="keyword">this</span>.temperatrue, <span class="keyword">this</span>.pressure, <span class="keyword">this</span>.humidity);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Client</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//创建一个WeatherData</span></span><br><span class="line">    WeatherData weatherData = <span class="keyword">new</span> WeatherData();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建观察者</span></span><br><span class="line">    CurrentConditions currentConditions = <span class="keyword">new</span> CurrentConditions();</span><br><span class="line">    BaiduSite baiduSite = <span class="keyword">new</span> BaiduSite();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//注册到weatherData</span></span><br><span class="line">    weatherData.registerObserver(currentConditions);</span><br><span class="line">    weatherData.registerObserver(baiduSite);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//测试</span></span><br><span class="line">    System.out.println(<span class="string">"通知各个注册的观察者, 看看信息"</span>);</span><br><span class="line">    weatherData.setData(<span class="number">10f</span>, <span class="number">100f</span>, <span class="number">30.3f</span>);</span><br><span class="line"></span><br><span class="line">    weatherData.removeObserver(currentConditions);</span><br><span class="line">    <span class="comment">//测试</span></span><br><span class="line">    System.out.println();</span><br><span class="line">    System.out.println(<span class="string">"通知各个注册的观察者, 看看信息"</span>);</span><br><span class="line">    weatherData.setData(<span class="number">10f</span>, <span class="number">100f</span>, <span class="number">30.3f</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>观察者模式的好处</p>
-<ol>
-<li>观察者模式设计后，会以集合的方式来管理用户(Observer)，包括注册，移除和通知。</li>
-<li>这样，我们增加观察者(这里可以理解成一个新的公告板)，就不需要去修改核心类WeatherData不会修改代码， 遵守了ocp原则。  </li>
-</ol>
-</li>
-</ul>
-<h2 id="5-观察者模式在Jdk应用的源码分析"><a href="#5-观察者模式在Jdk应用的源码分析" class="headerlink" title="5 观察者模式在Jdk应用的源码分析"></a>5 观察者模式在Jdk应用的源码分析</h2><ul>
-<li><p>Jdk的Observable类就使用了观察者模式  </p>
-</li>
-<li><p>代码分析+模式角色分析  </p>
-<p><img src="https://gitee.com/codeming2000/myblog-photos/raw/master/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F.assets/image-20210121103805670.png" alt="image-20210121103805670"></p>
-</li>
-<li><p>模式角色分析</p>
-<ul>
-<li>Observable 的作用和地位等价于 我们前面讲过Subject</li>
-<li>Observable 是类，不是接口，类中已经实现了核心的方法 ,即管理Observer的方法 add.. delete .. notify…</li>
-<li>Observer 的作用和地位等价于我们前面讲过的 Observer, 有update</li>
-<li>Observable 和 Observer 的使用方法和前面讲过的一样，只是Observable 是类，通过继承来实现观察者模式  </li>
-</ul>
-</li>
-</ul>
-
+        <h1 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h1><p>设计模式（Design pattern）是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结。使用设计模式是为了可重用代码、让代码更容易被他人理解、保证代码可靠性。
+        
+          <a class="article-more-a" href="/2020/09/15/23%20%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5/#more">more >></a>
+        
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>Thanks<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/alipay.jpg">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/assets/img/weixin.jpg">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -351,33 +216,16 @@
       
 
       
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/09/15/23%20%E7%A7%8D%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%90%86%E5%BF%B5/">展开全文 >></a>
+        </p>
+      
 
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2021/01/21/%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          中介者模式
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2021/01/21/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">迭代器模式</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -397,14 +245,12 @@
 
 
 
-  
-  
-  
 
   
-
   
-
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/8/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span>
+    </nav>
   
 
 
@@ -436,8 +282,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
