@@ -5,6 +5,81 @@ const ap = new APlayer({
 	order: 'random',
     audio: [
 	{
+        name: "回到夏天",
+        artist: '傲七爷 / 小田音乐社',
+        url: 'http://music.163.com/song/media/outer/url?id=1449678888.mp3',
+        cover: 'http://p2.music.126.net/6DtmsO-P4jyJPLjnGa8Ytg==/109951165004114065.jpg?param=130y130',
+      },{
+        name: "认真地老去",
+        artist: '张希 / 曹方',
+        url: 'http://music.163.com/song/media/outer/url?id=461080452.mp3',
+        cover: 'http://p1.music.126.net/LwisuwyurwWs3zpkoBIC9g==/19024849695642179.jpg?param=130y130',
+      },{
+        name: "晚安",
+        artist: '颜人中',
+        url: 'http://music.163.com/song/media/outer/url?id=1359356908.mp3',
+        cover: 'http://p1.music.126.net/8N1fsMRm2L5HyZccc6I3ew==/109951164007377169.jpg?param=130y130',
+      },{
+        name: "我在等",
+        artist: '林宝馨',
+        url: 'http://music.163.com/song/media/outer/url?id=1809976865.mp3',
+        cover: 'http://p1.music.126.net/-bhK61sS9wxPm2ATbn56mg==/109951165610821040.jpg?param=130y130',
+      },{
+        name: "白羊",
+        artist: '徐秉龙 / 沈以诚',
+        url: 'http://music.163.com/song/media/outer/url?id=514761281.mp3',
+        cover: 'http://p1.music.126.net/tczb_7II9KzSuLQsVt89Gw==/109951163049336667.jpg?param=130y130',
+      },{
+        name: "Please Don't Go",
+        artist: 'Joel Adams',
+        url: 'http://music.163.com/song/media/outer/url?id=37653063.mp3',
+        cover: 'http://p2.music.126.net/mBK9S-dCl0NW3yDUCwwqZw==/109951164853861010.jpg?param=130y130',
+      },{
+        name: "南方姑娘",
+        artist: '赵雷',
+        url: 'http://music.163.com/song/media/outer/url?id=202373.mp3',
+        cover: 'http://p1.music.126.net/wldFtES1Cjnbqr5bjlqQbg==/18876415625841069.jpg?param=130y130',
+      },{
+        name: "I Am You",
+        artist: 'Kim Taylor',
+        url: 'http://music.163.com/song/media/outer/url?id=2919622.mp3',
+        cover: 'http://p1.music.126.net/cCw5Kr5C52bYbV-AOp6IUA==/109951163073357482.jpg?param=130y130',
+      },{
+        name: "芒种",
+        artist: '音阙诗听 / 赵方婧',
+        url: 'http://music.163.com/song/media/outer/url?id=1369798757.mp3',
+        cover: 'http://p2.music.126.net/KFWbxh1ZLyy9WR77Ca08tA==/109951164866828786.jpg?param=130y130',
+      },{
+        name: "There For You",
+        artist: 'Martin Garrix / Troye Sivan',
+        url: 'http://music.163.com/song/media/outer/url?id=480426313.mp3',
+        cover: 'http://p1.music.126.net/E_ffmvXrVZoTugVf_Zf4Cg==/18520173860179248.jpg?param=130y130',
+      },{
+        name: "红昭愿",
+        artist: '音阙诗听',
+        url: 'http://music.163.com/song/media/outer/url?id=452986458.mp3',
+        cover: 'http://p2.music.126.net/8ltR3o9R8uJ9_5Cc71cDhA==/109951162951242154.jpg?param=130y130',
+      },{
+        name: "国王与乞丐",
+        artist: '华晨宇 / 杨宗纬',
+        url: 'http://music.163.com/song/media/outer/url?id=32835565.mp3',
+        cover: 'http://p1.music.126.net/UsSAd3Bdf77DjhCuTSEvUw==/109951163077613693.jpg?param=130y130',
+      },{
+        name: "虚拟",
+        artist: '陈粒',
+        url: 'http://music.163.com/song/media/outer/url?id=421423808.mp3',
+        cover: 'http://p2.music.126.net/HQxTggMCB7AHUXN-ZFEtmA==/1371091013186741.jpg?param=130y130',
+      },{
+        name: "End Of The Night",
+        artist: 'Danny Avila',
+        url: 'http://music.163.com/song/media/outer/url?id=1324159296.mp3',
+        cover: 'http://p1.music.126.net/JgypqYl8PkTOwtIallrpxQ==/109951163656707857.jpg?param=130y130',
+      },{
+        name: "想见你想见你想见你",
+        artist: '八三夭',
+        url: 'http://music.163.com/song/media/outer/url?id=1403215687.mp3',
+        cover: 'http://p2.music.126.net/8MjQbJQtJRV81d1dNfiH6A==/109951164485238047.jpg?param=130y130',
+      },{
         name: "失眠飞行",
         artist: '接个吻，开一枪',
         url: 'http://music.163.com/song/media/outer/url?id=1365898499.mp3',
