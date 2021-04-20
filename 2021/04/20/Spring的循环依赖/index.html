@@ -6,21 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://codeming2000.github.io/blog">
-  <title>享元模式 | CodeMing的博客</title>
+  <title>Spring的循环依赖 | CodeMing的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1 展示网站项目需求​        小型的外包项目，给客户A做一个产品展示网站， 客户A的朋友感觉效果不错，也希望做这样的产品展示网站，但是要求都有些不同：">
+  <meta name="description" content="什么是循环依赖多个bean之间相互依赖，形成了一个闭环。 比如:A依赖于B、B依赖于c、c依赖于A">
 <meta property="og:type" content="article">
-<meta property="og:title" content="享元模式">
-<meta property="og:url" content="https:&#x2F;&#x2F;codeming2000.github.io&#x2F;blog&#x2F;2021&#x2F;01&#x2F;20&#x2F;%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F&#x2F;index.html">
+<meta property="og:title" content="Spring的循环依赖">
+<meta property="og:url" content="https:&#x2F;&#x2F;codeming2000.github.io&#x2F;blog&#x2F;2021&#x2F;04&#x2F;20&#x2F;Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96&#x2F;index.html">
 <meta property="og:site_name" content="CodeMing的博客">
-<meta property="og:description" content="1 展示网站项目需求​        小型的外包项目，给客户A做一个产品展示网站， 客户A的朋友感觉效果不错，也希望做这样的产品展示网站，但是要求都有些不同：">
-<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;master&#x2F;%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.assets&#x2F;image-20210120121007459.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;master&#x2F;%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.assets&#x2F;image-20210120121315952.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;master&#x2F;%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.assets&#x2F;image-20210120121448871.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;master&#x2F;%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.assets&#x2F;image-20210120122033793.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;master&#x2F;%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.assets&#x2F;image-20210120123148825.png">
-<meta property="article:published_time" content="2021-01-20T04:06:57.763Z">
-<meta property="article:modified_time" content="2021-01-20T04:38:44.965Z">
+<meta property="og:description" content="什么是循环依赖多个bean之间相互依赖，形成了一个闭环。 比如:A依赖于B、B依赖于c、c依赖于A">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;dd408e21e4bd903a19bf1cadb178ad1fb4757ea0&#x2F;Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets&#x2F;image-20210420154836186.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;dd408e21e4bd903a19bf1cadb178ad1fb4757ea0&#x2F;Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets&#x2F;image-20210420154927269.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;dd408e21e4bd903a19bf1cadb178ad1fb4757ea0&#x2F;Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets&#x2F;image-20210420155609296.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;dd408e21e4bd903a19bf1cadb178ad1fb4757ea0&#x2F;Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets&#x2F;image-20210420155653488.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;dd408e21e4bd903a19bf1cadb178ad1fb4757ea0&#x2F;Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets&#x2F;image-20210420155715791.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;dd408e21e4bd903a19bf1cadb178ad1fb4757ea0&#x2F;Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets&#x2F;image-20210420160327082.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;dd408e21e4bd903a19bf1cadb178ad1fb4757ea0&#x2F;Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets&#x2F;image-20210420160418341.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;dd408e21e4bd903a19bf1cadb178ad1fb4757ea0&#x2F;Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets&#x2F;image-20210420160105791.png">
+<meta property="article:published_time" content="2021-04-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-20T08:10:04.765Z">
 <meta property="article:author" content="CodeMing">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="后端">
@@ -30,7 +33,7 @@
 <meta property="article:tag" content="代码">
 <meta property="article:tag" content="开源">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;master&#x2F;%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.assets&#x2F;image-20210120121007459.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;gitee.com&#x2F;codeming2000&#x2F;myblog-photos&#x2F;raw&#x2F;dd408e21e4bd903a19bf1cadb178ad1fb4757ea0&#x2F;Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets&#x2F;image-20210420154836186.png">
   
     <link rel="alternative" href="/atom.xml" title="CodeMing的博客" type="application/atom+xml">
   
@@ -185,14 +188,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-享元模式" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Spring的循环依赖" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      享元模式
+      Spring的循环依赖
     </h1>
   
 
@@ -208,108 +211,111 @@
 		
 		<!--显示阅读次数完毕-->
         
-        <a href="/2021/01/20/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2021-01-20T04:06:57.763Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-20</time>
+        <a href="/2021/04/20/Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/" class="archive-article-date">
+  	<time datetime="2021-04-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-展示网站项目需求"><a href="#1-展示网站项目需求" class="headerlink" title="1 展示网站项目需求"></a>1 展示网站项目需求</h2><p>​        小型的外包项目，给客户A做一个产品展示网站， 客户A的朋友感觉效果不错，也希望做这样的产品展示网站，但是要求都有些不同：<a id="more"></a></p>
+        <h2 id="什么是循环依赖"><a href="#什么是循环依赖" class="headerlink" title="什么是循环依赖"></a>什么是循环依赖</h2><p>多个bean之间相互依赖，形成了一个闭环。 比如:A依赖于B、B依赖于c、c依赖于A<a id="more"></a></p>
+<p><img src="https://gitee.com/codeming2000/myblog-photos/raw/dd408e21e4bd903a19bf1cadb178ad1fb4757ea0/Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets/image-20210420154836186.png" alt="image-20210420154836186"></p>
+<p>通常来说，如果问spring容器内部如何解决循环依赖， <strong>一定是指默认的单例Bean中</strong>，属性互相引用的场景</p>
+<p>也就是说，Spring的循环依赖，是Spring容器注入时候出现的问题</p>
+<h2 id="两种注入方式对循环依赖的影响"><a href="#两种注入方式对循环依赖的影响" class="headerlink" title="两种注入方式对循环依赖的影响"></a>两种注入方式对循环依赖的影响</h2><h3 id="循环依赖官网说明"><a href="#循环依赖官网说明" class="headerlink" title="循环依赖官网说明"></a>循环依赖官网说明</h3><p><a href="https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans" target="_blank" rel="noopener">https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans</a></p>
+<p><img src="https://gitee.com/codeming2000/myblog-photos/raw/dd408e21e4bd903a19bf1cadb178ad1fb4757ea0/Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets/image-20210420154927269.png" alt="image-20210420154927269"></p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>我们AB循环依赖问题只要A的注入方式是setter且singleton, 就不会有循环依赖问题</p>
+<h2 id="spring容器循环依赖报错演示BeanCurrentlylnCreationException"><a href="#spring容器循环依赖报错演示BeanCurrentlylnCreationException" class="headerlink" title="spring容器循环依赖报错演示BeanCurrentlylnCreationException"></a>spring容器循环依赖报错演示BeanCurrentlylnCreationException</h2><h3 id="循环依赖现象在Spring容器中-注入依赖的对象，有2种情况"><a href="#循环依赖现象在Spring容器中-注入依赖的对象，有2种情况" class="headerlink" title="循环依赖现象在Spring容器中 注入依赖的对象，有2种情况"></a>循环依赖现象在Spring容器中 注入依赖的对象，有2种情况</h3><h4 id="构造器方式注入依赖"><a href="#构造器方式注入依赖" class="headerlink" title="构造器方式注入依赖"></a>构造器方式注入依赖</h4><h5 id="code"><a href="#code" class="headerlink" title="code"></a>code</h5><p>ServiceA</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceA</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ServiceB serviceB;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ServiceA</span><span class="params">(ServiceB serviceB)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.serviceB = serviceB;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ServiceB</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceB</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ServiceA serviceA;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ServiceB</span><span class="params">(ServiceA serviceA)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.serviceA = serviceA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ClientConstructor</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 通过构造器的方式注入依赖，构造器的方式注入依赖的bean，下面两个bean循环依赖</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 测试后发现，构造器循环依赖是无法解决的</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClientConstructor</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> ServiceA(<span class="keyword">new</span> ServiceB(<span class="keyword">new</span> ServiceA(<span class="keyword">new</span> ServiceB()))); ....</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="结论-1"><a href="#结论-1" class="headerlink" title="结论"></a>结论</h5><p>构造器注入没有办法解决循环依赖， 你想让构造器注入支持循环依赖，是不存在的</p>
+<h4 id="以set方式注入依赖"><a href="#以set方式注入依赖" class="headerlink" title="以set方式注入依赖"></a>以set方式注入依赖</h4><h5 id="code-1"><a href="#code-1" class="headerlink" title="code"></a>code</h5><p>ServiceA</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceA</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ServiceB serviceB;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setServiceB</span><span class="params">(ServiceB serviceB)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.serviceB = serviceB;</span><br><span class="line">        System.out.println(<span class="string">"A 里面设置了B"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ServiceB</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceB</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ServiceA serviceA;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setServiceA</span><span class="params">(ServiceA serviceA)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.serviceA = serviceA;</span><br><span class="line">        System.out.println(<span class="string">"B 里面设置了A"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ClientSet</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClientSet</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//创建serviceA</span></span><br><span class="line">        ServiceA serviceA = <span class="keyword">new</span> ServiceA();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建serviceB</span></span><br><span class="line">        ServiceB serviceB = <span class="keyword">new</span> ServiceB();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将serviceA注入到serviceB中</span></span><br><span class="line">        serviceB.setServiceA(serviceA);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将serviceB注入到serviceA中</span></span><br><span class="line">        serviceA.setServiceB(serviceB);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="spring容器"><a href="#spring容器" class="headerlink" title="spring容器"></a>spring容器</h3><ul>
+<li>默认的单例(singleton)的场景是支持循环依赖的，不报错</li>
+<li>原型(Prototype)的场景是不支持循环依赖的，报错</li>
+</ul>
+<p>步骤</p>
 <ul>
-<li>有客户要求以新闻的形式发布</li>
-<li>有客户人要求以博客的形式发布</li>
-<li>有客户希望以微信公众号的形式发布  </li>
-</ul>
-<h2 id="2-传统方案解决网站展现项目"><a href="#2-传统方案解决网站展现项目" class="headerlink" title="2 传统方案解决网站展现项目"></a>2 传统方案解决网站展现项目</h2><ul>
-<li><p>直接复制粘贴一份，然后根据客户不同要求，进行定制修改</p>
+<li><p>applicationContext.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="tag"><span class="string">                           http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">                           http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="tag"><span class="string">                           http://www.springframework.org/schema/context/spring-context.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">                           http://www.springframework.org/schema/aop</span></span></span><br><span class="line"><span class="tag"><span class="string">                           http://www.springframework.org/schema/aop/spring-aop.xsd</span></span></span><br><span class="line"><span class="tag"><span class="string">                           http://www.springframework.org/schema/tx</span></span></span><br><span class="line"><span class="tag"><span class="string">                           http://www.springframework.org/schema/tx/spring-tx.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">        1.spring容器默认的单例模式可以解决循环引用，单例默认支持</span></span><br><span class="line"><span class="comment">        2.spring容器原型依赖模式scope="prototype"多例模式下不能解决循环引用</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--depends-on 的意思就是当前这个bean如果要完成，先看depends-on指定的bean是否已经完成了初始化--&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--scope="prototype"代表每次都要新建一次对象--&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"a"</span> <span class="attr">class</span>=<span class="string">"com.hhf.study.spring.circulardepend.A"</span> &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"b"</span> <span class="attr">ref</span>=<span class="string">"b"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"b"</span> <span class="attr">class</span>=<span class="string">"com.hhf.study.spring.circulardepend.B"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"a"</span> <span class="attr">ref</span>=<span class="string">"a"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>给每个网站租用一个空间</p>
+<li><p>log4j.properties</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### 设置###</span></span><br><span class="line"><span class="meta">log4j.rootLogger</span> = <span class="string">debug,stdout,D,E</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 输出信息到控制抬 ###</span></span><br><span class="line"><span class="meta">log4j.appender.stdout</span> = <span class="string">org.apache.log4j.ConsoleAppender</span></span><br><span class="line"><span class="meta">log4j.appender.stdout.Target</span> = <span class="string">System.out</span></span><br><span class="line"><span class="meta">log4j.appender.stdout.layout</span> = <span class="string">org.apache.log4j.PatternLayout</span></span><br><span class="line"><span class="meta">log4j.appender.stdout.layout.ConversionPattern</span> = <span class="string">[%-5p] %d&#123;yyyy-MM-dd HH:mm:ss,SSS&#125; method:%l%n%m%n</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 输出DEBUG 级别以上的日志到=E://logs/error.log ###</span></span><br><span class="line"><span class="meta">log4j.appender.D</span> = <span class="string">org.apache.log4j.DailyRollingFileAppender</span></span><br><span class="line"><span class="meta">log4j.appender.D.File</span> = <span class="string">E://logs/log.log</span></span><br><span class="line"><span class="meta">log4j.appender.D.Append</span> = <span class="string">true</span></span><br><span class="line"><span class="meta">log4j.appender.D.Threshold</span> = <span class="string">DEBUG </span></span><br><span class="line"><span class="meta">log4j.appender.D.layout</span> = <span class="string">org.apache.log4j.PatternLayout</span></span><br><span class="line"><span class="meta">log4j.appender.D.layout.ConversionPattern</span> = <span class="string">%-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r ] - [ %p ]  %m%n</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### 输出ERROR 级别以上的日志到=E://logs/error.log ###</span></span><br><span class="line"><span class="meta">log4j.appender.E</span> = <span class="string">org.apache.log4j.DailyRollingFileAppender</span></span><br><span class="line"><span class="meta">log4j.appender.E.File</span> =<span class="string">E://logs/error.log </span></span><br><span class="line"><span class="meta">log4j.appender.E.Append</span> = <span class="string">true</span></span><br><span class="line"><span class="meta">log4j.appender.E.Threshold</span> = <span class="string">ERROR </span></span><br><span class="line"><span class="meta">log4j.appender.E.layout</span> = <span class="string">org.apache.log4j.PatternLayout</span></span><br><span class="line"><span class="meta">log4j.appender.E.layout.ConversionPattern</span> = <span class="string">%-d&#123;yyyy-MM-dd HH:mm:ss&#125;  [ %t:%r</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>方案设计示意图  </p>
-<p><img src="https://gitee.com/codeming2000/myblog-photos/raw/master/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.assets/image-20210120121007459.png" alt="image-20210120121007459"></p>
+<li><p>默认单例，修改为原型scope=”prototype” 就导致了循环依赖错误</p>
 </li>
-</ul>
-<h2 id="3-传统方案解决网站展现项目-问题分析"><a href="#3-传统方案解决网站展现项目-问题分析" class="headerlink" title="3 传统方案解决网站展现项目-问题分析"></a>3 传统方案解决网站展现项目-问题分析</h2><ul>
-<li>要的网站结构相似度很高，而且都不是高访问量网站，如果分成多个虚拟空间来处理，相当于一个相同网站的实例对象很多，造成服务器的资源浪费</li>
-<li>解决思路：整合到一个网站中，共享其相关的代码和数据，对于硬盘、内存、 CPU、数据库空间等服务器资源都可以达成共享，减少服务器资源</li>
-<li>对于代码来说， 由于是一份实例，维护和扩展都更加容易</li>
-<li>上面的解决思路就可以使用 <code>享元模式</code> 来解决  </li>
-</ul>
-<h2 id="4-享元模式基本介绍"><a href="#4-享元模式基本介绍" class="headerlink" title="4 享元模式基本介绍"></a>4 享元模式基本介绍</h2><ul>
-<li><p>享元模式（Flyweight Pattern） 也叫 蝇量模式: 运用共享技术有效地支持大量细粒度的对象</p>
+<li><p>ClientSpringContainer</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.support.ClassPathXmlApplicationContext;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * nested exception is org.springframework.beans.factory.BeanCurrentlyInCreationException:</span></span><br><span class="line"><span class="comment"> * Error creating bean with name 'a': 578624778</span></span><br><span class="line"><span class="comment"> * Requested bean is currently in creation: Is there an unresolvable circular reference?</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 只有单例的bean会通过三级缓存提前暴露来解决循环依赖的问题，因为单例的时候只有一份，随时复用，那么就放到缓存里面</span></span><br><span class="line"><span class="comment"> * 而多例的bean，每次从容器中荻取都是—个新的对象，都会重B新创建， </span></span><br><span class="line"><span class="comment"> * 所以非单例的bean是没有缓存的，不会将其放到三级缓存中。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClientSpringContainer</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ApplicationContext context = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br><span class="line">        A a = context.getBean(<span class="string">"a"</span>,A<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">        B b = context.getBean(<span class="string">"b"</span>,B<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>常用于系统底层开发，解决系统的性能问题。像<strong>数据库连接池</strong>，里面都是创建好的连接对象，在这些连接对象中有我们需要的则直接拿来用，避免重新创建， 如果没有我们需要的，则创建一个</p>
-</li>
-<li><p>享元模式能够解决<strong>重复对象的内存浪费的问题</strong>，当系统中有大量相似对象，需要缓冲池时。 不需总是创建新对象，可以从缓冲池里拿。这样可以降低系统内存，同时提高效率</p>
-</li>
-<li><p>享元模式经典的应用场景就是<strong>池技术</strong>了， String常量池、数据库连接池、缓冲池等等都是享元模式的应用，享元模式是池技术的重要实现方式  </p>
-<p><img src="https://gitee.com/codeming2000/myblog-photos/raw/master/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.assets/image-20210120121315952.png" alt="image-20210120121315952"></p>
+<li><p>循环依赖异常</p>
+<p><img src="https://gitee.com/codeming2000/myblog-photos/raw/dd408e21e4bd903a19bf1cadb178ad1fb4757ea0/Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets/image-20210420155609296.png" alt="image-20210420155609296"></p>
 </li>
 </ul>
-<h2 id="5-享元模式的原理类图"><a href="#5-享元模式的原理类图" class="headerlink" title="5 享元模式的原理类图"></a>5 享元模式的原理类图</h2><p><img src="https://gitee.com/codeming2000/myblog-photos/raw/master/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.assets/image-20210120121448871.png" alt="image-20210120121448871"></p>
-<ul>
-<li>对类图的说明<ol>
-<li>FlyWeight 是抽象的享元角色，他是产品的抽象类，同时定义出对象的外部状态和内部状态(后面介绍)的接口或实现</li>
-<li>ConcreteFlyWeight 是具体的享元角色，是具体的产品类，实现抽象角色定义相关业务</li>
-<li>UnSharedConcreteFlyWeight 是不可共享的角色，一般不会出现在享元工厂。</li>
-<li>FlyWeightFactory 享元工厂类，用于构建一个池容器(集合)，同时提供从池中获取对象方法</li>
+<h3 id="重要结论-spring内部通过3级缓存来解决循环依赖"><a href="#重要结论-spring内部通过3级缓存来解决循环依赖" class="headerlink" title="重要结论(spring内部通过3级缓存来解决循环依赖)"></a>重要结论(spring内部通过3级缓存来解决循环依赖)</h3><h4 id="DefaultSingletonBeanRegistry"><a href="#DefaultSingletonBeanRegistry" class="headerlink" title="DefaultSingletonBeanRegistry"></a>DefaultSingletonBeanRegistry</h4><p><img src="https://gitee.com/codeming2000/myblog-photos/raw/dd408e21e4bd903a19bf1cadb178ad1fb4757ea0/Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets/image-20210420155653488.png" alt="image-20210420155653488"></p>
+<p>第一级缓存〈也叫单例池）singletonObjects:存放已经经历了完整生命周期的Bean对象</p>
+<p>第二级缓存: earlySingletonObjects，存放早期暴露出来的Bean对象，Bean的生命周期未结束（属性还未填充完整）</p>
+<p>第三级缓存: Map&lt;String, ObiectFactory&lt;?&gt;&gt; singletonFactories，存放可以生成Bean的工厂</p>
+<p><img src="https://gitee.com/codeming2000/myblog-photos/raw/dd408e21e4bd903a19bf1cadb178ad1fb4757ea0/Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets/image-20210420155715791.png" alt="image-20210420155715791"></p>
+<p><strong>所谓的三级缓存其实就是spring容器内部用来解决循环依赖问题的三个map</strong></p>
+<h2 id="循环依赖Debug"><a href="#循环依赖Debug" class="headerlink" title="循环依赖Debug"></a>循环依赖Debug</h2><h3 id="实例化-初始化"><a href="#实例化-初始化" class="headerlink" title="实例化/初始化"></a>实例化/初始化</h3><p>实例化:堆内存中申请一块内存空间</p>
+<p>初始化属性填充:完成属性的各种赋值</p>
+<h3 id="3大Map和四大方法，总体相关对象"><a href="#3大Map和四大方法，总体相关对象" class="headerlink" title="3大Map和四大方法，总体相关对象"></a>3大Map和四大方法，总体相关对象</h3><p><img src="https://gitee.com/codeming2000/myblog-photos/raw/dd408e21e4bd903a19bf1cadb178ad1fb4757ea0/Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets/image-20210420160327082.png" alt="image-20210420160327082"></p>
+<p>三级缓存+四大方法</p>
+<p>1.getSingleton：希望从容器里面获得单例的bean，没有的话</p>
+<p>2.doCreateBean: 没有就创建bean</p>
+<p>3.populateBean: 创建完了以后，要填充属性</p>
+<p>4.addSingleton: 填充完了以后，再添加到容器进行使用</p>
+<p>第一层singletonObjects存放的是已经初始化好了的Bean,</p>
+<p>第二层earlySingletonObjects存放的是实例化了，但是未初始化的Bean,</p>
+<p>第三层singletonFactories存放的是FactoryBean。假如A类实现了FactoryBean,那么依赖注入的时候不是A类，而是A类产生的Bean</p>
+<p><img src="https://gitee.com/codeming2000/myblog-photos/raw/dd408e21e4bd903a19bf1cadb178ad1fb4757ea0/Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets/image-20210420160418341.png" alt="image-20210420160418341"></p>
+<h3 id="A-B两对象在三级缓存中的迁移说明"><a href="#A-B两对象在三级缓存中的迁移说明" class="headerlink" title="A/B两对象在三级缓存中的迁移说明"></a>A/B两对象在三级缓存中的迁移说明</h3><p>1 A创建过程中需要B，于是A将自己放到三级缓存里面，去实例化B</p>
+<p>2 B实例化的时候发现需要A，于是B先查一级缓存，没有，再查二级缓存，还是没有，再查三级缓存，找到了A<br>然后把三级缓存里面的这个A放到二级缓存里面，并删除三级缓存里面的A</p>
+<p>3 B顺利初始化完毕，将自己放到一级缓存里面（此时B里面的A依然是创建中状态）<br>然后回来接着创建A，此时B已经创建结束，直接从一级缓存里面拿到B，然后完成创建，并将A自己放到一级缓存里面。</p>
+<h2 id="总结spring是如何解决的循环依赖"><a href="#总结spring是如何解决的循环依赖" class="headerlink" title="总结spring是如何解决的循环依赖?"></a>总结spring是如何解决的循环依赖?</h2><table>
+<thead>
+<tr>
+<th>Spring创建bean主要分为两个步骤，创建原始bean对象，接着去填充对象属性和初始化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>每次创建bean之前，我们都会从缓存中查下有没有该bean，因为是单例，只能有一个</td>
+</tr>
+<tr>
+<td>当我们创建 beanA的原始对象后，并把它放到三级缓存中，接下来就该填充对象属性了，这时候发现依赖了beanB，接着就又去创建beanB，同样的流程，创建完 beanB填充属性时又发现它依赖了beanA又是同样的流程，不同的是：这时候可以在三级缓存中查到刚放进去的原始对象beanA，所以不需要继续创建，用它注入beanB，完成beanB的创建</td>
+</tr>
+<tr>
+<td>既然 beanB创建好了，所以beanA就可以完成填充属性的步骤了，接着执行剩下的逻辑，闭环完成</td>
+</tr>
+</tbody></table>
+<h3 id="spring解决循环依赖的整个流程图"><a href="#spring解决循环依赖的整个流程图" class="headerlink" title="spring解决循环依赖的整个流程图"></a>spring解决循环依赖的整个流程图</h3><p><img src="https://gitee.com/codeming2000/myblog-photos/raw/dd408e21e4bd903a19bf1cadb178ad1fb4757ea0/Spring%E7%9A%84%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96.assets/image-20210420160105791.png" alt="image-20210420160105791"></p>
+<h3 id="Debug的步骤—-gt-Spring解决循环依赖过程"><a href="#Debug的步骤—-gt-Spring解决循环依赖过程" class="headerlink" title="Debug的步骤—-&gt;Spring解决循环依赖过程"></a>Debug的步骤—-&gt;Spring解决循环依赖过程</h3><ol>
+<li>调用doGetBean()方法，想要获取beanA，于是调用getSingleton()方法从缓存中查找beanA</li>
+<li>在getSingleton()方法中，从一级缓存中查找，没有，返回null</li>
+<li>doGetBean()方法中获取到的beanA为null，于是走对应的处理逻辑，调用getSingleton()的重载方法（参数为ObjectFactory的)</li>
+<li>在getSingleton()方法中，先将beanA_name添加到一个集合中，用于标记该bean正在创建中。然后回调匿名内部类的creatBean方法</li>
+<li>进入AbstractAutowireCapableBeanFactory#doCreateBean，先反射调用构造器创建出beanA的实例，然后判断。是否为单例、是否允许提前暴露引用(对于单例一般为true)、是否正在创建中〈即是否在第四步的集合中)。判断为true则将beanA添加到【三级缓存】中</li>
+<li>对beanA进行属性填充，此时检测到beanA依赖于beanB，于是开始查找beanB</li>
+<li>调用doGetBean()方法，和上面beanA的过程一样，到缓存中查找beanB，没有则创建，然后给beanB填充属性</li>
+<li>此时beanB依赖于beanA，调用getsingleton()获取beanA，依次从一级、二级、三级缓存中找，此时从三级缓存中获取到beanA的创建工厂，通过创建工厂获取到singletonObject，此时这个singletonObject指向的就是上面在doCreateBean()方法中实例化的beanA</li>
+<li>这样beanB就获取到了beanA的依赖，于是beanB顺利完成实例化，并将beanA从三级缓存移动到二级缓存中</li>
+<li>随后beanA继续他的属性填充工作，此时也获取到了beanB，beanA也随之完成了创建，回到getsingleton()方法中继续向下执行，将beanA从二级缓存移动到一级缓存中</li>
 </ol>
-</li>
-</ul>
-<h2 id="6-内部状态和外部状态"><a href="#6-内部状态和外部状态" class="headerlink" title="6 内部状态和外部状态"></a>6 内部状态和外部状态</h2><p>比如围棋、五子棋、跳棋，它们都有大量的棋子对象，围棋和五子棋只有黑白两色，跳棋颜色多一点，所以棋子颜色就是棋子的内部状态；而各个棋子之间的差别就是位置的不同，当我们落子后，落子颜色是定的，但位置是变化的，所以棋子坐标就是棋子的外部状态</p>
-<ul>
-<li>享元模式提出了两个要求：细粒度和共享对象。这里就涉及到内部状态和外部状态了，即将对象的信息分为两个部分： 内部状态和外部状态</li>
-<li>内部状态指对象共享出来的信息，存储在享元对象内部且不会随环境的改变而改变</li>
-<li>外部状态指对象得以依赖的一个标记，是随环境改变而改变的、不可共享的状态。</li>
-<li>举个例子：围棋理论上有361个空位可以放棋子，每盘棋都有可能有两三百个棋子对象产生，因为内存空间有限，一台服务器很难支持更多的玩家玩围棋游戏，如果用享元模式来处理棋子，那么棋子对象就可以减少到只有两个实例，这样就很好的解决了对象的开销问题  </li>
-</ul>
-<h2 id="7-享元模式解决网站展现项目"><a href="#7-享元模式解决网站展现项目" class="headerlink" title="7 享元模式解决网站展现项目"></a>7 享元模式解决网站展现项目</h2><ul>
-<li><p>思路分析和图解(类图)  </p>
-<p><img src="https://gitee.com/codeming2000/myblog-photos/raw/master/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.assets/image-20210120122033793.png" alt="image-20210120122033793"></p>
-</li>
-<li><p>代码实现</p>
-<ul>
-<li><p>WebSite</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">WebSite</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">use</span><span class="params">(User user)</span></span>;<span class="comment">//抽象方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>ConcreteWebSite</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//具体网站</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteWebSite</span> <span class="keyword">extends</span> <span class="title">WebSite</span> </span>&#123;</span><br><span class="line">    <span class="comment">//共享的部分，内部状态</span></span><br><span class="line">    <span class="keyword">private</span> String type = <span class="string">""</span>; <span class="comment">//网站发布的形式(类型)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//构造器</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConcreteWebSite</span><span class="params">(String type)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.type = type;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">use</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"网站的发布形式为:"</span> + type + <span class="string">" 在使用中 .. 使用者是"</span> + user.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>WebSiteFactory</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 网站工厂类，根据需要返回压一个网站</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebSiteFactory</span> </span>&#123;</span><br><span class="line">    <span class="comment">//集合， 充当池的作用</span></span><br><span class="line">    <span class="keyword">private</span> HashMap&lt;String, ConcreteWebSite&gt; pool = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//根据网站的类型，返回一个网站, 如果没有就创建一个网站，并放入到池中,并返回</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> WebSite <span class="title">getWebSiteCategory</span><span class="params">(String type)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!pool.containsKey(type)) &#123;</span><br><span class="line">            <span class="comment">//就创建一个网站，并放入到池中</span></span><br><span class="line">            pool.put(type, <span class="keyword">new</span> ConcreteWebSite(type));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (WebSite)pool.get(type);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取网站分类的总数 (池中有多少个网站类型)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getWebSiteCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> pool.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>User(外部状态)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Client</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个工厂类</span></span><br><span class="line">    WebSiteFactory factory = <span class="keyword">new</span> WebSiteFactory();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 客户要一个以新闻形式发布的网站</span></span><br><span class="line">    WebSite webSite1 = factory.getWebSiteCategory(<span class="string">"新闻"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    webSite1.use(<span class="keyword">new</span> User(<span class="string">"tom"</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 客户要一个以博客形式发布的网站</span></span><br><span class="line">    WebSite webSite2 = factory.getWebSiteCategory(<span class="string">"博客"</span>);</span><br><span class="line">    webSite2.use(<span class="keyword">new</span> User(<span class="string">"jack"</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 客户要一个以博客形式发布的网站</span></span><br><span class="line">    WebSite webSite3 = factory.getWebSiteCategory(<span class="string">"博客"</span>);</span><br><span class="line">    webSite3.use(<span class="keyword">new</span> User(<span class="string">"smith"</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 客户要一个以博客形式发布的网站</span></span><br><span class="line">    WebSite webSite4 = factory.getWebSiteCategory(<span class="string">"博客"</span>);</span><br><span class="line">    webSite4.use(<span class="keyword">new</span> User(<span class="string">"king"</span>));</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"网站的分类共="</span> + factory.getWebSiteCount()); <span class="comment">//2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="8-享元模式在JDK-Interger的应用源码分析"><a href="#8-享元模式在JDK-Interger的应用源码分析" class="headerlink" title="8 享元模式在JDK-Interger的应用源码分析"></a>8 享元模式在JDK-Interger的应用源码分析</h2><ul>
-<li><p>Integer中的享元模式  </p>
-</li>
-<li><p>代码分析+Debug源码+说明  </p>
-<p><img src="https://gitee.com/codeming2000/myblog-photos/raw/master/%E4%BA%AB%E5%85%83%E6%A8%A1%E5%BC%8F.assets/image-20210120123148825.png" alt="image-20210120123148825"></p>
-</li>
-<li><p>代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//如果 Integer.valueOf(x) x 在  -128 --- 127 直接，就是使用享元模式返回,如果不在范围类，则仍然 new </span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//小结:</span></span><br><span class="line">    <span class="comment">//1. 在valueOf 方法中，先判断值是否在 IntegerCache 中，如果不在，就创建新的Integer(new), 否则，就直接从 缓存池返回</span></span><br><span class="line">    <span class="comment">//2. valueOf 方法，就使用到享元模式</span></span><br><span class="line">    <span class="comment">//3. 如果使用valueOf 方法得到一个Integer 实例，范围在 -128 - 127 ，执行速度比 new 快</span></span><br><span class="line">    Integer x = Integer.valueOf(<span class="number">127</span>);</span><br><span class="line">    Integer y = <span class="keyword">new</span> Integer(<span class="number">127</span>);</span><br><span class="line">    Integer z = Integer.valueOf(<span class="number">127</span>);</span><br><span class="line">    Integer w = <span class="keyword">new</span> Integer(<span class="number">127</span>);</span><br><span class="line">    System.out.println(x.equals(y)); <span class="comment">// true</span></span><br><span class="line">    System.out.println(x == y); <span class="comment">// false</span></span><br><span class="line">    System.out.println(x == z); <span class="comment">// true</span></span><br><span class="line">    System.out.println(w == x); <span class="comment">// false</span></span><br><span class="line">    System.out.println(w == y); <span class="comment">// false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="9-享元模式的注意事项和细节"><a href="#9-享元模式的注意事项和细节" class="headerlink" title="9 享元模式的注意事项和细节"></a>9 享元模式的注意事项和细节</h2><ul>
-<li>在享元模式这样理解，“享”就表示共享，“元”表示对象</li>
-<li>系统中有大量对象， 这些对象消耗大量内存， 并且对象的状态大部分可以外部化时，我们就可以考虑选用享元模式</li>
-<li>用唯一标识码判断，如果在内存中有，则返回这个唯一标识码所标识的对象，用HashMap/HashTable存储</li>
-<li>享元模式大大减少了对象的创建，降低了程序内存的占用，提高效率</li>
-<li>享元模式提高了<strong>系统的复杂度</strong>。需要分离出<strong>内部状态和外部状态</strong>，而外部状态具有固化特性，不应该随着内部状态的改变而改变，这是我们使用享元模式需要注意的地方.</li>
-<li>使用享元模式时，注意划分内部状态和外部状态，并且需要有一个工厂类加以控制。</li>
-<li>享元模式经典的应用场景是需要缓冲池的场景，比如 String常量池、 数据库连接池  </li>
-</ul>
 
       
 
@@ -362,18 +368,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2021/01/20/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          代理模式
-        
-      </div>
-    </a>
   
-  
-    <a href="/2021/01/20/%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">外观模式</div>
+    <a href="/2021/03/26/rabbitmq/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">RabbitMQ笔记</div>
       <i class="icon-circle-right"></i>
     </a>
   

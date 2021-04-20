@@ -78,7 +78,7 @@
 			</ul>
 		</nav>
 		<nav>
-			总文章数 79
+			总文章数 80
 		</nav>
 		<nav class="header-smart-menu">
     		
@@ -178,6 +178,76 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-类加载器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/17/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/">类加载器</a>
+    </h1>
+  
+
+		<!--显示阅读次数-->
+		
+		<!--显示阅读次数完毕-->
+        
+        <a href="/2020/12/17/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" class="archive-article-date">
+  	<time datetime="2020-12-17T08:50:14.151Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h1><p>类加载器是 JVM 执行类加载机制的前提</p>
+<p>ClassLoader 的作用：</p>
+<p>​        ClassLoader 是 Java 的核心组件，所有的 Class 都是由 ClassLoader 进行加载的，ClassLoader 负责通过各种方式将 Class 信息的二进制数据流读入JVM 内部，转换为一个与目标类对应的 java.lang.Class 对象实例。然后交给Java 虚拟机尽心链接、初始化等操作。因此，ClassLoader 在整个装载阶段，只能影响到类的加载，而无法通过 ClassLoader 去改变类的链接和初始化行为。至于它是否可以运行，则由 Execution Engine 决定</p>
+        
+          <a class="article-more-a" href="/2020/12/17/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/12/17/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-类的加载过程详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -775,74 +845,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/12/08/Java%E4%B8%AD%E7%9A%84%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-JVM解释器与编译器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/12/08/JVM%E8%A7%A3%E9%87%8A%E5%99%A8%E4%B8%8E%E7%BC%96%E8%AF%91%E5%99%A8/">JVM解释器与编译器</a>
-    </h1>
-  
-
-		<!--显示阅读次数-->
-		
-		<!--显示阅读次数完毕-->
-        
-        <a href="/2020/12/08/JVM%E8%A7%A3%E9%87%8A%E5%99%A8%E4%B8%8E%E7%BC%96%E8%AF%91%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2020-12-08T09:29:15.666Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>许多人认为Java是一门解释执行的语言，由虚拟机解释执行class文件字节码。事实是Java是一门解释执行和编译执行并存的语言。JVM解释器让Java程序快速启动，编译器让Java程序高效运行，这是Java长久生存的一大重要原因。</p>
-        
-          <a class="article-more-a" href="/2020/12/08/JVM%E8%A7%A3%E9%87%8A%E5%99%A8%E4%B8%8E%E7%BC%96%E8%AF%91%E5%99%A8/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/12/08/JVM%E8%A7%A3%E9%87%8A%E5%99%A8%E4%B8%8E%E7%BC%96%E8%AF%91%E5%99%A8/">展开全文 >></a>
         </p>
       
 
