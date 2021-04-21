@@ -6,14 +6,16 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://codeming2000.github.io/blog">
-  <title>Archives: 2020/12 | CodeMing的博客</title>
+  <title>LRU算法实现 | CodeMing的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="河南大学软件学院18级本科生">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CodeMing的博客">
-<meta property="og:url" content="https:&#x2F;&#x2F;codeming2000.github.io&#x2F;blog&#x2F;archives&#x2F;2020&#x2F;12&#x2F;index.html">
+  <meta name="description" content="WhatLRU是Least Recently Used的缩写，即最近最少使用，是一种常用的页面置换算法， 选择最近最久未使用的数据予以淘汰。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LRU算法实现">
+<meta property="og:url" content="https:&#x2F;&#x2F;codeming2000.github.io&#x2F;blog&#x2F;2021&#x2F;04&#x2F;21&#x2F;LRU%E7%AE%97%E6%B3%95&#x2F;index.html">
 <meta property="og:site_name" content="CodeMing的博客">
-<meta property="og:description" content="河南大学软件学院18级本科生">
+<meta property="og:description" content="WhatLRU是Least Recently Used的缩写，即最近最少使用，是一种常用的页面置换算法， 选择最近最久未使用的数据予以淘汰。">
+<meta property="article:published_time" content="2021-04-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-21T07:25:38.250Z">
 <meta property="article:author" content="CodeMing">
 <meta property="article:tag" content="java">
 <meta property="article:tag" content="后端">
@@ -177,295 +179,136 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-LRU算法" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LRU算法实现
+    </h1>
+  
+
+		<!--显示阅读次数-->
+		
+		  <br/>
+		  <a class="cloud-tie-join-count" href="javascript:void(0);" style="color:gray;font-size:14px;">
+		  <span class="icon-sort"></span>
+		  <span id="busuanzi_container_page_pv" style="color:#ef7522;font-size:14px;">
+					阅读数: <span id="busuanzi_value_page_pv"></span>次 &nbsp;&nbsp;
+		  </span>
+		  </a>
+		
+		<!--显示阅读次数完毕-->
+        
+        <a href="/2021/04/21/LRU%E7%AE%97%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2021-04-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-04-21</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="What"><a href="#What" class="headerlink" title="What"></a>What</h2><p>LRU是Least Recently Used的缩写，即最近最少使用，是一种常用的页面置换算法，</p>
+<p>选择最近最久未使用的数据予以淘汰。<a id="more"></a></p>
+<h2 id="Source"><a href="#Source" class="headerlink" title="Source"></a>Source</h2><p><a href="https://leetcode-cn.com/problems/lru-cache/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/lru-cache/</a></p>
+<h2 id="Design-ideas"><a href="#Design-ideas" class="headerlink" title="Design ideas"></a>Design ideas</h2><p>LRU的算法核心是哈希链表</p>
+<p>本质就是HashMap+DoubleLinkedList 时间复杂度是O(1)，哈希表+双向链表的结合体</p>
+<h2 id="How-to-implement"><a href="#How-to-implement" class="headerlink" title="How to implement"></a>How to implement</h2><h3 id="Case1"><a href="#Case1" class="headerlink" title="Case1"></a>Case1</h3><p>参考LinkedHashMap</p>
+<p>依赖JDK</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.hhf.study.lru;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.LinkedHashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LRUCacheDemo</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">LinkedHashMap</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> capacity;<span class="comment">//缓存坑位</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LRUCacheDemo</span><span class="params">(<span class="keyword">int</span> capacity)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(capacity,<span class="number">0.75F</span>,<span class="keyword">false</span>);</span><br><span class="line">        <span class="keyword">this</span>.capacity = capacity;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">removeEldestEntry</span><span class="params">(Map.Entry&lt;K, V&gt; eldest)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.size() &gt; capacity;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LRUCacheDemo lruCacheDemo = <span class="keyword">new</span> LRUCacheDemo(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        lruCacheDemo.put(<span class="number">1</span>,<span class="string">"a"</span>);</span><br><span class="line">        lruCacheDemo.put(<span class="number">2</span>,<span class="string">"b"</span>);</span><br><span class="line">        lruCacheDemo.put(<span class="number">3</span>,<span class="string">"c"</span>);</span><br><span class="line">        System.out.println(lruCacheDemo.keySet());</span><br><span class="line"></span><br><span class="line">        lruCacheDemo.put(<span class="number">4</span>,<span class="string">"d"</span>);</span><br><span class="line">        System.out.println(lruCacheDemo.keySet());</span><br><span class="line"></span><br><span class="line">        lruCacheDemo.put(<span class="number">3</span>,<span class="string">"c"</span>);</span><br><span class="line">        System.out.println(lruCacheDemo.keySet());</span><br><span class="line">        lruCacheDemo.put(<span class="number">3</span>,<span class="string">"c"</span>);</span><br><span class="line">        System.out.println(lruCacheDemo.keySet());</span><br><span class="line">        lruCacheDemo.put(<span class="number">3</span>,<span class="string">"c"</span>);</span><br><span class="line">        System.out.println(lruCacheDemo.keySet());</span><br><span class="line">        lruCacheDemo.put(<span class="number">5</span>,<span class="string">"x"</span>);</span><br><span class="line">        System.out.println(lruCacheDemo.keySet());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * true</span></span><br><span class="line"><span class="comment"> * [1, 2, 3]</span></span><br><span class="line"><span class="comment"> * [2, 3, 4]</span></span><br><span class="line"><span class="comment"> * [2, 4, 3]</span></span><br><span class="line"><span class="comment"> * [2, 4, 3]</span></span><br><span class="line"><span class="comment"> * [2, 4, 3]</span></span><br><span class="line"><span class="comment"> * [4, 3, 5]</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * false</span></span><br><span class="line"><span class="comment"> [1, 2, 3]</span></span><br><span class="line"><span class="comment"> [2, 3, 4]</span></span><br><span class="line"><span class="comment"> [2, 3, 4]</span></span><br><span class="line"><span class="comment"> [2, 3, 4]</span></span><br><span class="line"><span class="comment"> [2, 3, 4]</span></span><br><span class="line"><span class="comment"> [3, 4, 5]</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Case2"><a href="#Case2" class="headerlink" title="Case2"></a>Case2</h3><p>不依赖JDK</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ming.brush.leetcode.linkedlist;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.w3c.dom.Node;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedHashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LRUCache2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//map负责查找，构建一个虚拟的双向链表，它里面安装的就是一个个Node节点，作为数据载体。</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//1.构造一个node节点作为数据载体</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">        K key;</span><br><span class="line">        V value;</span><br><span class="line">        Node&lt;K, V&gt; prev;</span><br><span class="line">        Node&lt;K, V&gt; next;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.prev = <span class="keyword">this</span>.next = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(K key, V value)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.key = key;</span><br><span class="line">            <span class="keyword">this</span>.value = value;</span><br><span class="line">            <span class="keyword">this</span>.prev = <span class="keyword">this</span>.next = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2 构建一个虚拟的双向链表,,里面安放的就是我们的Node</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">DoubleLinkedList</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">        Node&lt;K, V&gt; head;</span><br><span class="line">        Node&lt;K, V&gt; tail;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">DoubleLinkedList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            head = <span class="keyword">new</span> Node&lt;&gt;();</span><br><span class="line">            tail = <span class="keyword">new</span> Node&lt;&gt;();</span><br><span class="line">            head.next = tail;</span><br><span class="line">            tail.prev = head;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3. 添加到头</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addHead</span><span class="params">(Node&lt;K, V&gt; node)</span> </span>&#123;</span><br><span class="line">            node.next = head.next;</span><br><span class="line">            node.prev = head;</span><br><span class="line">            head.next.prev = node;</span><br><span class="line">            head.next = node;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4.删除节点</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeNode</span><span class="params">(Node&lt;K, V&gt; node)</span> </span>&#123;</span><br><span class="line">            node.next.prev = node.prev;</span><br><span class="line">            node.prev.next = node.next;</span><br><span class="line">            node.prev = <span class="keyword">null</span>;</span><br><span class="line">            node.next = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//5.获得最后一个节点</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Node <span class="title">getLast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> tail.prev;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> cacheSize;</span><br><span class="line">    Map&lt;Integer, Node&lt;Integer, Integer&gt;&gt; map;</span><br><span class="line">    DoubleLinkedList&lt;Integer, Integer&gt; doubleLinkedList;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LRUCache2</span><span class="params">(<span class="keyword">int</span> cacheSize)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.cacheSize = cacheSize;<span class="comment">//坑位</span></span><br><span class="line">        map = <span class="keyword">new</span> HashMap&lt;&gt;();<span class="comment">//查找</span></span><br><span class="line">        doubleLinkedList = <span class="keyword">new</span> DoubleLinkedList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!map.containsKey(key)) &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        Node&lt;Integer, Integer&gt; node = map.get(key);</span><br><span class="line">        doubleLinkedList.removeNode(node);</span><br><span class="line">        doubleLinkedList.addHead(node);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> node.value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (map.containsKey(key)) &#123;  <span class="comment">//update</span></span><br><span class="line">            Node&lt;Integer, Integer&gt; node = map.get(key);</span><br><span class="line">            node.value = value;</span><br><span class="line">            map.put(key, node);</span><br><span class="line"></span><br><span class="line">            doubleLinkedList.removeNode(node);</span><br><span class="line">            doubleLinkedList.addHead(node);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (map.size() == cacheSize)  <span class="comment">//坑位满了</span></span><br><span class="line">            &#123;</span><br><span class="line">                Node&lt;Integer, Integer&gt; lastNode = doubleLinkedList.getLast();</span><br><span class="line">                map.remove(lastNode.key);</span><br><span class="line">                doubleLinkedList.removeNode(lastNode);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//新增一个</span></span><br><span class="line">            Node&lt;Integer, Integer&gt; newNode = <span class="keyword">new</span> Node&lt;&gt;(key, value);</span><br><span class="line">            map.put(key, newNode);</span><br><span class="line">            doubleLinkedList.addHead(newNode);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        LRUCache2 lruCacheDemo = <span class="keyword">new</span> LRUCache2(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">        lruCacheDemo.put(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">        lruCacheDemo.put(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line">        lruCacheDemo.put(<span class="number">3</span>, <span class="number">3</span>);</span><br><span class="line">        System.out.println(lruCacheDemo.map.keySet());</span><br><span class="line"></span><br><span class="line">        lruCacheDemo.put(<span class="number">4</span>, <span class="number">1</span>);</span><br><span class="line">        System.out.println(lruCacheDemo.map.keySet());</span><br><span class="line"></span><br><span class="line">        lruCacheDemo.put(<span class="number">3</span>, <span class="number">1</span>);</span><br><span class="line">        System.out.println(lruCacheDemo.map.keySet());</span><br><span class="line">        lruCacheDemo.put(<span class="number">3</span>, <span class="number">1</span>);</span><br><span class="line">        System.out.println(lruCacheDemo.map.keySet());</span><br><span class="line">        lruCacheDemo.put(<span class="number">3</span>, <span class="number">1</span>);</span><br><span class="line">        System.out.println(lruCacheDemo.map.keySet());</span><br><span class="line">        lruCacheDemo.get(<span class="number">2</span>);</span><br><span class="line">        lruCacheDemo.put(<span class="number">5</span>, <span class="number">1</span>);</span><br><span class="line">        System.out.println(lruCacheDemo.map.keySet());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">[1, 2, 3]</span></span><br><span class="line"><span class="comment">[2, 3, 4]</span></span><br><span class="line"><span class="comment">[2, 3, 4]</span></span><br><span class="line"><span class="comment">[2, 3, 4]</span></span><br><span class="line"><span class="comment">[2, 3, 4]</span></span><br><span class="line"><span class="comment">[2, 3, 5]</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>Thanks<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/weixin.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/19/volatile%E5%85%B3%E9%94%AE%E5%AD%97%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2020-12-19T03:01:02.180Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/19/volatile%E5%85%B3%E9%94%AE%E5%AD%97%E6%80%BB%E7%BB%93/">volatile关键字总结</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/17/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" class="archive-article-date">
-  	<time datetime="2020-12-17T08:50:14.151Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-17</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2021/04/21/Redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Redis分布式锁</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/17/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/">类加载器</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/16/%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2020-12-16T01:06:07.160Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/16/%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3/">类的加载过程详解</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/15/%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86%E4%B8%8E%E8%A7%A3%E6%9E%90%E4%B8%BE%E4%BE%8B/" class="archive-article-date">
-  	<time datetime="2020-12-15T14:46:09.277Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/15/%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4%E9%9B%86%E4%B8%8E%E8%A7%A3%E6%9E%90%E4%B8%BE%E4%BE%8B/">字节码指令集与解析举例</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/14/Class%E7%B1%BB%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2020-12-14T15:14:43.094Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/14/Class%E7%B1%BB%E6%96%87%E4%BB%B6%E7%9A%84%E7%BB%93%E6%9E%84/">Class类文件的结构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/14/Class%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" class="archive-article-date">
-  	<time datetime="2020-12-14T10:17:35.016Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/14/Class%E5%AD%97%E8%8A%82%E7%A0%81%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">Class字节码文件结构</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/14/JVM%E6%8C%87%E4%BB%A4%E6%89%8B%E5%86%8C/" class="archive-article-date">
-  	<time datetime="2020-12-14T10:17:35.016Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/14/JVM%E6%8C%87%E4%BB%A4%E6%89%8B%E5%86%8C/">JVM指令手册</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/11/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/" class="archive-article-date">
-  	<time datetime="2020-12-11T13:45:15.343Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-11</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/11/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AF%87/">JVM垃圾回收篇</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/10/Maven/" class="archive-article-date">
-  	<time datetime="2020-12-10T08:58:51.901Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/10/Maven/">Maven</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/08/StringTable/" class="archive-article-date">
-  	<time datetime="2020-12-08T12:59:27.779Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-08</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/08/StringTable/">StringTable</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2020/12/page/2/">2</a><a class="extend next" rel="next" href="/archives/2020/12/page/2/">Next &amp;raquo;</a>
-    </nav>
   
 
 
@@ -498,8 +341,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
