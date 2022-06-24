@@ -360,15 +360,15 @@
 
 <h3 id="1-3-3-注册中央调度器"><a href="#1-3-3-注册中央调度器" class="headerlink" title="1.3.3 注册中央调度器"></a>1.3.3 注册中央调度器</h3><p><img src="http://codeming-blog-images.codeming.cn/blog/SpringMVC.assets/image-20210204113636987.png" alt="image-20210204113636987"></p>
 <h4 id="（1）-全限定性类名"><a href="#（1）-全限定性类名" class="headerlink" title="（1） 全限定性类名"></a>（1） 全限定性类名</h4><p>​        该中央调度器为一个 Servlet，名称为 DispatcherServlet。 中央调度器的全限定性类名在导入的 Jar 文件 spring-webmvc-5.2.5.RELEASE.jar 的第一个包 org.springframework.web.servlet下可找到。  </p>
-<h4 id="（2）-lt-load-on-startup-gt"><a href="#（2）-lt-load-on-startup-gt" class="headerlink" title="（2） &lt;load-on-startup/&gt;"></a>（2） &lt;load-on-startup/&gt;</h4><p>​        在<servlet/>中添加<load-on-startup/>的作用是，标记是否在Web服务器（这里是Tomcat）<br>启动时会创建这个 Servlet 实例，即是否在 Web 服务器启动时调用执行该 Servlet 的 init()方法，而不是在真正访问时才创建。 </p>
+<h4 id="（2）-lt-load-on-startup-gt"><a href="#（2）-lt-load-on-startup-gt" class="headerlink" title="（2） &lt;load-on-startup/&gt;"></a>（2） &lt;load-on-startup/&gt;</h4><p>​        在<servlet>中添加<load-on-startup>的作用是，标记是否在Web服务器（这里是Tomcat）<br>启动时会创建这个 Servlet 实例，即是否在 Web 服务器启动时调用执行该 Servlet 的 init()方法，而不是在真正访问时才创建。 </load-on-startup></servlet></p>
 <p>​        它的值必须是一个整数 </p>
 <ul>
 <li>当值大于等于 0 时，表示容器在启动时就加载并初始化这个 servlet，数值越小，该 Servlet的优先级就越高， 其被创建的也就越早； </li>
 <li>当值小于 0 或者没有指定时，则表示该 Servlet 在真正被使用时才会去创建。</li>
 <li>当值相同时，容器会自己选择创建顺序。</li>
 </ul>
-<h4 id="（3）-lt-url-pattern-gt"><a href="#（3）-lt-url-pattern-gt" class="headerlink" title="（3） &lt;url-pattern/&gt;"></a>（3） &lt;url-pattern/&gt;</h4><p>​        对于<url-pattern/>，可以写为 / ，建议写为*.do 的形式 </p>
-<h4 id="（4）-配置文件位置与名称"><a href="#（4）-配置文件位置与名称" class="headerlink" title="（4） 配置文件位置与名称"></a>（4） 配置文件位置与名称</h4><p>​        注册完毕后，可直接在服务器上发布运行。此时，访问浏览器页面，控制台均会抛出FileNotFoundException 异常。即默认要从项目根下的 WEB-INF 目录下找名称为 Servlet 名称-servlet.xml 的配置文件。这里的“Servlet 名称”指的是注册中央调度器<servlet-name/>标签中指定的 Servlet 的 name 值。本例配置文件名为 springmvc-servlet.xml。 </p>
+<h4 id="（3）-lt-url-pattern-gt"><a href="#（3）-lt-url-pattern-gt" class="headerlink" title="（3） &lt;url-pattern/&gt;"></a>（3） &lt;url-pattern/&gt;</h4><p>​        对于<url-pattern>，可以写为 / ，建议写为*.do 的形式 </url-pattern></p>
+<h4 id="（4）-配置文件位置与名称"><a href="#（4）-配置文件位置与名称" class="headerlink" title="（4） 配置文件位置与名称"></a>（4） 配置文件位置与名称</h4><p>​        注册完毕后，可直接在服务器上发布运行。此时，访问浏览器页面，控制台均会抛出FileNotFoundException 异常。即默认要从项目根下的 WEB-INF 目录下找名称为 Servlet 名称-servlet.xml 的配置文件。这里的“Servlet 名称”指的是注册中央调度器<servlet-name>标签中指定的 Servlet 的 name 值。本例配置文件名为 springmvc-servlet.xml。 </servlet-name></p>
 <p><img src="http://codeming-blog-images.codeming.cn/blog/SpringMVC.assets/image-20210204114024929.png" alt="image-20210204114024929"></p>
 <p>​        而一般情况下， 配置文件是放在类路径下，即 resources 目录下。所以，在注册中央调度器时，还需要为中央调度器设置查找 SpringMVC 配置文件路径，及文件名。 </p>
 <p><img src="http://codeming-blog-images.codeming.cn/blog/SpringMVC.assets/image-20210204114039959.png" alt="image-20210204114039959"></p>
@@ -590,10 +590,10 @@
 <p><img src="http://codeming-blog-images.codeming.cn/blog/SpringMVC.assets/image-20210204132316427.png" alt="image-20210204132316427"></p>
 <p>修改页面：  </p>
 <p><img src="http://codeming-blog-images.codeming.cn/blog/SpringMVC.assets/image-20210204132324533.png" alt="image-20210204132324533">  </p>
-<h2 id="2-4-解读-lt-url-pattern-gt"><a href="#2-4-解读-lt-url-pattern-gt" class="headerlink" title="2.4 解读&lt;url-pattern/&gt;"></a>2.4 解读&lt;url-pattern/&gt;</h2><h3 id="2-4-1-配置详解"><a href="#2-4-1-配置详解" class="headerlink" title="2.4.1 配置详解"></a>2.4.1 配置详解</h3><h4 id="（1）-do"><a href="#（1）-do" class="headerlink" title="（1） *.do"></a>（1） *.do</h4><p>​        在没有特殊要求的情况下， SpringMVC 的中央调度器 DispatcherServlet 的<url-pattern/>常使用后辍匹配方式，如写为*.do 或者 *.action, *.mvc 等。  </p>
+<h2 id="2-4-解读-lt-url-pattern-gt"><a href="#2-4-解读-lt-url-pattern-gt" class="headerlink" title="2.4 解读&lt;url-pattern/&gt;"></a>2.4 解读&lt;url-pattern/&gt;</h2><h3 id="2-4-1-配置详解"><a href="#2-4-1-配置详解" class="headerlink" title="2.4.1 配置详解"></a>2.4.1 配置详解</h3><h4 id="（1）-do"><a href="#（1）-do" class="headerlink" title="（1） *.do"></a>（1） *.do</h4><p>​        在没有特殊要求的情况下， SpringMVC 的中央调度器 DispatcherServlet 的<url-pattern>常使用后辍匹配方式，如写为*.do 或者 *.action, *.mvc 等。  </url-pattern></p>
 <h4 id="（2）"><a href="#（2）" class="headerlink" title="（2） /"></a>（2） /</h4><p>​        可以写为/，因为 DispatcherServlet 会将向静态资源的获取请求，例如.css、 .js、 .jpg、 .png等资源的获取请求，当作是一个普通的 Controller 请求。 中央调度器会调用处理器映射器为其查找相应的处理器。当然也是找不到的，所以在这种情况下，所有的静态资源获取请求也均会报 404 错误。  </p>
 <p>项目： url-pattern。在项目 primary-annotation 基础上进行修改。  </p>
-<p>​        需求：在 index.jsp 页面中存在一个访问图片的链接。该项目用于演示将<url-pattern/>写为*.do可以访问到该图片，而写为/，则无法访问。  </p>
+<p>​        需求：在 index.jsp 页面中存在一个访问图片的链接。该项目用于演示将<url-pattern>写为*.do可以访问到该图片，而写为/，则无法访问。  </url-pattern></p>
 <h5 id="A、-在项目中添加图片"><a href="#A、-在项目中添加图片" class="headerlink" title="A、 在项目中添加图片"></a>A、 在项目中添加图片</h5><p>在项目的 WebRoot 下添加一个目录 images，并在其中添加一张图片资源。  </p>
 <p><img src="http://codeming-blog-images.codeming.cn/blog/SpringMVC.assets/image-20210204132535419.png" alt="image-20210204132535419"></p>
 <h5 id="B、-修改index页面"><a href="#B、-修改index页面" class="headerlink" title="B、 修改index页面"></a>B、 修改index页面</h5><p><img src="http://codeming-blog-images.codeming.cn/blog/SpringMVC.assets/image-20210204132541894.png" alt="image-20210204132541894"></p>

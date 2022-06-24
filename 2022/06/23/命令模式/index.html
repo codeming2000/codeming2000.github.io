@@ -277,9 +277,9 @@
 <ul>
 <li><p>StatementCallback 接口 ,类似命令接口(Command)</p>
 </li>
-<li><p>class <strong>QueryStatementCallback</strong> implements StatementCallback<T>.SqlProvider: 局部内部类， 实现了命令接口， 同时也充当命令接收者</p>
+<li><p>class <strong>QueryStatementCallback</strong> implements StatementCallback<T>.SqlProvider: 局部内部类， 实现了命令接口， 同时也充当命令接收者</T></p>
 </li>
-<li><p>命令调用者 是 JdbcTemplate , 其中execute(StatementCallback<T> action) 方法中，调用action.doInStatement 方法. 不同的 实现 StatementCallback 接口的对象，对应不同的doInStatemnt 实现逻辑</p>
+<li><p>命令调用者 是 JdbcTemplate , 其中execute(StatementCallback<T> action) 方法中，调用action.doInStatement 方法. 不同的 实现 StatementCallback 接口的对象，对应不同的doInStatemnt 实现逻辑</T></p>
 </li>
 <li><p>另外实现 StatementCallback 命令接口的子类还有 </p>
 <p><img src="http://codeming-blog-images.codeming.cn/blog/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F.assets/image-20210120215054365.png" alt="image-20210120215054365"></p>

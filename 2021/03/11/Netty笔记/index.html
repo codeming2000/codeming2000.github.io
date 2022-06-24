@@ -726,8 +726,8 @@
 <p>public ServerBootstrap group(EventLoopGroup parentGroup, EventLoopGroup childGroup)， 该方法用于服务器端，用来设置两个 EventLoop</p>
 <p>public B group(EventLoopGroup group) ， 该方法用于客户端， 用来设置一个 EventLoop</p>
 <p>public B channel(Class&lt;? extends C&gt; channelClass)， 该方法用来设置一个服务器端的通道实现</p>
-<p>public &lt;T&gt; B option(ChannelOption<T> option, T value)， 用来给 ServerChannel 添加配置</p>
-<p>public &lt;T&gt; ServerBootstrap childOption(ChannelOption<T> childOption, T value)， 用来给接收到的通道添加配置</p>
+<p>public &lt;T&gt; B option(ChannelOption<T> option, T value)， 用来给 ServerChannel 添加配置</T></p>
+<p>public &lt;T&gt; ServerBootstrap childOption(ChannelOption<T> childOption, T value)， 用来给接收到的通道添加配置</T></p>
 <p>public ServerBootstrap childHandler(ChannelHandler childHandler)， 该方法用来设置业务处理类（ 自定义的<br>handler）</p>
 <p>public ChannelFuture bind(int inetPort) ， 该方法用于服务器端， 用来设置占用的端口号</p>
 <p>public ChannelFuture connect(String inetHost, int inetPort) ， 该方法用于客户端， 用来连接服务器端  </p>
@@ -1388,7 +1388,7 @@
 
 <p>说明: </p>
 <p>1) 当判定下个 outbound 的 executor 线程不是当前线程的时候， 会将当前的工作封装成 task ， 然后放入 mpsc 队列中， 等待 IO 任务执行完毕后执行队列中的任务。 </p>
-<p>2) 这里可以 Debug 来验证(提醒： Debug 时， 服务器端 Debug ,客户端 Run 的方式)， 当我们使用了 group.submit(new Callable<Object>(){} 在 handler 中 加 入 线 程 池 ， 就 会 进 入 到 safeExecute(executor, task, promise, m); 如果去掉这段代码， 而使用普通方式来执行耗时的业务， 那么就不会进入到safeExecute(executor, task, promise, m);</p>
+<p>2) 这里可以 Debug 来验证(提醒： Debug 时， 服务器端 Debug ,客户端 Run 的方式)， 当我们使用了 group.submit(new Callable<Object>(){} 在 handler 中 加 入 线 程 池 ， 就 会 进 入 到 safeExecute(executor, task, promise, m); 如果去掉这段代码， 而使用普通方式来执行耗时的业务， 那么就不会进入到safeExecute(executor, task, promise, m);</Object></p>
 <ol start="12">
 <li>处理耗时业务的第二种方式-Context 中添加线程池</li>
 </ol>

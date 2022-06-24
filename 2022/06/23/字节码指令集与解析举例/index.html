@@ -281,15 +281,15 @@
 </li>
 <li><p><strong>常用指令</strong></p>
 <ul>
-<li><p>「局部变量压栈指令」将一个局部变量加载到操作数栈：xload、xload_<n> (其中 x 为 i、l、f、d、a，n 为 0 到 3)；xaload、xaload<n> (其 x 为 i、l、f、d、a、b、c、s，n 为 0 到 3)_</p>
+<li><p>「局部变量压栈指令」将一个局部变量加载到操作数栈：xload、xload_<n> (其中 x 为 i、l、f、d、a，n 为 0 到 3)；xaload、xaload<n> (其 x 为 i、l、f、d、a、b、c、s，n 为 0 到 3)_</n></n></p>
 </li>
-<li><p><em>「常量入栈指令」将一个常量加载到操作数栈：bipush、sipush、ldc、ldc_w、 ldc2_w、aconst_null、iconst_m1、iconst</em><i>、iconst_<l>、fconst_<f>、dconst_<d>_</p>
+<li><p><em>「常量入栈指令」将一个常量加载到操作数栈：bipush、sipush、ldc、ldc_w、 ldc2_w、aconst_null、iconst_m1、iconst</em><i>、iconst_<l>、fconst_<f>、dconst_<d>_</d></f></l></i></p>
 </li>
-<li><p><em>「出栈装入局部变量表指令」将一个数值从操作数栈存储到局部变量表： xstore、xstore</em><n>(其中 x 为 i、l、f、d、a，n 为 0 到 3); xastore(其中 x 为 i、l、f、d、a、b、c、s)</p>
+<li><p><em>「出栈装入局部变量表指令」将一个数值从操作数栈存储到局部变量表： xstore、xstore</em><n>(其中 x 为 i、l、f、d、a，n 为 0 到 3); xastore(其中 x 为 i、l、f、d、a、b、c、s)</n></p>
 </li>
 <li><p>扩充局部变量表的访问索引的指令：wide</p>
-<p>​        上面所列举的指令助记符中，有一部分是以尖括号结尾的(例如 iload_<n>)。这些指令助记符实际上代表了一组指令(例如 iload_<n>代表了 iload_0、iload_1、iload_2 和 iload_3 这几个指令)。这几组指令都是某个带有一个操作数的通用指令(例如 iload)的特殊形式，对于这若干组特殊指令来说，它们表面上没有操作数， 不需要进行取操作数的动作，但操作数都隐含在指令中</p>
-<p>​        除此之外，它们的语义与原生的通用指令完全一致(例如 iload_0 的语义与操作数为 0 时的 iload 指令语义完全一致)。在尖括号之间的字母指定了指令隐含操作数的数据类型，<n>代表非负的整数，<i>代表是 int 类型数据，<l>代表 long 类型，<f>代表 float 类型，<d>代表 double 类型</p>
+<p>​        上面所列举的指令助记符中，有一部分是以尖括号结尾的(例如 iload_<n>)。这些指令助记符实际上代表了一组指令(例如 iload_<n>代表了 iload_0、iload_1、iload_2 和 iload_3 这几个指令)。这几组指令都是某个带有一个操作数的通用指令(例如 iload)的特殊形式，对于这若干组特殊指令来说，它们表面上没有操作数， 不需要进行取操作数的动作，但操作数都隐含在指令中</n></n></p>
+<p>​        除此之外，它们的语义与原生的通用指令完全一致(例如 iload_0 的语义与操作数为 0 时的 iload 指令语义完全一致)。在尖括号之间的字母指定了指令隐含操作数的数据类型，<n>代表非负的整数，<i>代表是 int 类型数据，<l>代表 long 类型，<f>代表 float 类型，<d>代表 double 类型</d></f></l></i></n></p>
 <p>​        操作 byte、char、short 和 boolean 类型数据时，经常用 int 类型的指令来表示</p>
 </li>
 </ul>
@@ -313,14 +313,14 @@
 <p>在方法执行时，虚拟机使用局部变量表完成方法的传递</p>
 <h2 id="2-2-局部变量压栈指令"><a href="#2-2-局部变量压栈指令" class="headerlink" title="2.2   局部变量压栈指令"></a>2.2   局部变量压栈指令</h2><p>​        局部变量压栈指令将给定的局部变量表中的数据压入操作数栈这类指令大体可以分为：</p>
 <ul>
-<li>xload_<n>(x 为 i、l、f、d、a，n 为 0 到 3)</li>
+<li>xload_<n>(x 为 i、l、f、d、a，n 为 0 到 3)</n></li>
 <li>xload(x 为 i、l、f、d、a)</li>
 </ul>
 <p>说明：在这里，x 的取值表示数据类型</p>
 <p>​        指令 xload_n 表示将第 n 个局部变量压入操作数栈，比如 iload_1、fload_0、aload_0 等指令。其中 aload_n 表示将一个对象引用压栈</p>
 <p>​        指令 xload 通过指定参数的形式，把局部变量压入操作数栈，当使用这个命令时，表示局部变量的数量可能超过了 4 个，比如指令 iload、fload 等</p>
 <h2 id="2-3-常量入栈指令"><a href="#2-3-常量入栈指令" class="headerlink" title="2.3   常量入栈指令"></a>2.3   常量入栈指令</h2><p>​        常量入栈指令的功能是将常数压入操作数栈，根据数据类型和入栈内容的不同，又可以分为 const 系列、push 系列和 ldc 指令</p>
-<p>​        <strong>指令 const 系列：</strong>用于对特定的常量入栈，入栈的常量隐含在指令本身里。指令有：iconst_<i>(i 从-1 到 5)、lconst_<l>(l 从 0 到 1)、fconst_<f>(f 从 0 到2)、dconst_<d>(d 从 0 到 1)、aconst_null</p>
+<p>​        <strong>指令 const 系列：</strong>用于对特定的常量入栈，入栈的常量隐含在指令本身里。指令有：iconst_<i>(i 从-1 到 5)、lconst_<l>(l 从 0 到 1)、fconst_<f>(f 从 0 到2)、dconst_<d>(d 从 0 到 1)、aconst_null</d></f></l></i></p>
 <p>比如：</p>
 <ul>
 <li>iconst_m1 将-1 压入操作数栈</li>
